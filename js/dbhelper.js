@@ -20,7 +20,8 @@ class DBHelper {
     }
     //create database restaurant-reviews, version, and stand up the Database
     return idb.open('restaurant-reviews', 1, function (upgradeDb) {
-      
+      //create restaurants database that are arranged by the id of the data set
+      const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
     })
   }
 
