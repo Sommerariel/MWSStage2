@@ -11,13 +11,38 @@ class DBHelper {
     const port = 1337; // Change this to your server port
     return `http://localhost:${port}/restaurants/`;
   }
-
+  static openDatabase() {
+    if (!navigator.serviceWorker) {
+      return;
+      console.log('Does Not Support');
+    }
+    return idb.open('restaurant-reviews', 1, function(upgradeDB) {
+      const keyValStore = upgradeDB.createObjectStore('restaurants');
+    })
+  }
   /**
-   * Fetch all restaurants
+  create a transaction for the restaurants store then we can return getALL which returns a promise for everything in the index
+  */
+  static getRestaurantsDB() {
+    return DBHelper.openDatabase().then(db => {
+      return db.transaction('restaurants').objectStore(restaurants).getALL();
+    })
+  }
+  /**
+   * Fetch all restaurants from the database first and then if not available go to the network
    */
    static fetchRestaurants(callback) {
-     //fetch from the api
-     fetch(DBHelper.DATABASE_URL).then(response => response.json()).then(restaurants =>callback(null, restaurants));
+     DBHelper.getRestaurantsDB().then(restaurants => {
+       if (restaurants.length > 0) {
+         console.log('Fetching restaurants from the database');
+         callback(null, restaurants);
+       } else {
+         console.log('Fetching restaurants from the network');
+         //fetch from the api
+         fetch(DBHelper.DATABASE_URL).then(response => response.json()).then(restaurants =>callback(null, restaurants));
+       }
+     })
+     .catch((error => console.log('There was an error fetching the data: ${error}')));
    }
 /**
   static fetchRestaurants(callback) {
