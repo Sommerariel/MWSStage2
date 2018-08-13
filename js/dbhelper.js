@@ -13,7 +13,7 @@ class DBHelper {
   }
   static openDatabase() {
     if (!navigator.serviceWorker) {
-      return;
+      return Promise.resolve();
       console.log('Does Not Support');
     }
     return idb.open('restaurant-reviews', 1, function(upgradeDB) {
