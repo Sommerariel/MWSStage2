@@ -13,9 +13,10 @@ class DBHelper {
   }
 
   /**
-   * Fetch all restaurants.
+   * Fetch all restaurants
    */
    static fetchRestaurants(callback) {
+     //fetch from the api
      fetch(DBHelper.DATABASE_URL).then(response => response.json()).then(restaurants =>callback(null, restaurants));
    }
 /**
