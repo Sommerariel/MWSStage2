@@ -22,6 +22,9 @@ class DBHelper {
     return idb.open('restaurant-reviews', 1, function (upgradeDb) {
       //create restaurants database that are arranged by the id of the data set
       const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
+      //create an index that the store can be sorted by and used to query on. In the UI we use neighborhood and cuisine
+      restStore.createIndex('neighborhood', 'neighborhood');
+      restStore.createIndex('cuisine', 'cuisine_type');
     })
   }
 
