@@ -13,13 +13,13 @@ class DBHelper {
   }
 
   //open the idb database
-  static openIDB() {
+    static openIDB() {
     // If the browser doesn't support service worker, then there isn't a point to having a databse
     if (!navigator.serviceWorker) {
       return Promise.resolve();
     }
     //create database restaurant-reviews, version, and stand up the Database
-    return idb.open('restaurant-reviews', 1, function (upgradeDb) {
+    var dpPromise = idb.open('restaurant-reviews', 1, function (upgradeDb) {
       console.log('made new object store');
       //create restaurants database that are arranged by the id of the data set
       const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
@@ -28,7 +28,6 @@ class DBHelper {
       restStore.createIndex('cuisine', 'cuisine_type');
     });
   }
-
 
 
   /**
@@ -136,7 +135,7 @@ class DBHelper {
   /**
    * Fetch all neighborhoods with proper error handling.
    */
-   /**
+
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -151,11 +150,11 @@ class DBHelper {
       }
     });
   }
-*/
+
   /**
    * Fetch all cuisines with proper error handling.
    */
-   /**
+
   static fetchCuisines(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -170,7 +169,7 @@ class DBHelper {
       }
     });
   }
-*/
+
   /**
    * Restaurant page URL.
    */
@@ -200,7 +199,8 @@ class DBHelper {
   }
 
 }
-
+//actually creates the database and opens it. Without this you are neevr calling the database to ever do it's thing!
+const dbPromise = DBHelper.openIDB();
 //Check if browser supports service worker. If so regsiter it!
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
