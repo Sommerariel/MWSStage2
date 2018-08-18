@@ -29,6 +29,17 @@ class DBHelper {
     });
   }
 
+  //get all the resturant data from the server into the Database
+  static getRest() {
+    return DBHelper.openIDB().then(db => {
+      return db.transaction('restaurants').objectStore('restaurants').getAll();
+      console.log('retrieved rest data');
+    })
+    .catch((error => consol.log(`ERR fetching Resturants: ${error}`)));
+  }
+
+
+
 
   /**
    * Fetch all restaurants from the JSON file that is served at the port
