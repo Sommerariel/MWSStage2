@@ -14,7 +14,7 @@ class DBHelper {
 
   //open the idb database
   static openIDB() {
-    //resolve if the browser does not support service workers
+    //resolve if the browser does not support service workers. If it doesn't involve service workers, then we don't want to create a database either.
     if (!navigator.serviceWorker) {
       return Promise.resolve();
     }
@@ -28,8 +28,10 @@ class DBHelper {
     })
   }
 
+
+
   /**
-   * Fetch all restaurants
+   * Fetch all restaurants from the JSON file that is served at the port
    */
    static fetchRestaurants(callback) {
      console.log('Fetching restaurants from the network');
