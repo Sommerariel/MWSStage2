@@ -14,18 +14,19 @@ class DBHelper {
 
   //open the idb database
   static openIDB() {
-    //resolve if the browser does not support service workers. If it doesn't involve service workers, then we don't want to create a database either.
+    // If the browser doesn't support service worker, then there isn't a point to having a databse
     if (!navigator.serviceWorker) {
       return Promise.resolve();
     }
     //create database restaurant-reviews, version, and stand up the Database
     return idb.open('restaurant-reviews', 1, function (upgradeDb) {
+      console.log('made new object store');
       //create restaurants database that are arranged by the id of the data set
       const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
       //create an index that the store can be sorted by and used to query on. In the UI we use neighborhood and cuisine
       restStore.createIndex('neighborhood', 'neighborhood');
       restStore.createIndex('cuisine', 'cuisine_type');
-    })
+    });
   }
 
 
@@ -38,6 +39,8 @@ class DBHelper {
      //fetch from the api
      fetch(DBHelper.DATABASE_URL).then(response => response.json()).then(restaurants =>callback(null, restaurants));
    }
+
+
 /**
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
@@ -77,6 +80,7 @@ class DBHelper {
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
+ /**
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -89,10 +93,11 @@ class DBHelper {
       }
     });
   }
-
+*/
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
    */
+   /**
   static fetchRestaurantByNeighborhood(neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -105,6 +110,7 @@ class DBHelper {
       }
     });
   }
+  */
 
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
@@ -130,6 +136,7 @@ class DBHelper {
   /**
    * Fetch all neighborhoods with proper error handling.
    */
+   /**
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -144,10 +151,11 @@ class DBHelper {
       }
     });
   }
-
+*/
   /**
    * Fetch all cuisines with proper error handling.
    */
+   /**
   static fetchCuisines(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -162,7 +170,7 @@ class DBHelper {
       }
     });
   }
-
+*/
   /**
    * Restaurant page URL.
    */
