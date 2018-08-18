@@ -19,7 +19,7 @@ class DBHelper {
       return Promise.resolve();
     }
     //create database restaurant-reviews, version, and stand up the Database
-    var dpPromise = idb.open('restaurant-reviews', 1, function (upgradeDb) {
+    var dpPromise = idb.open('restaurant-reviews', 2, function (upgradeDb) {
       console.log('made new object store');
       //create restaurants database that are arranged by the id of the data set
       const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
@@ -29,7 +29,22 @@ class DBHelper {
     });
   }
 
-  //get all the resturant data from the server into the Database
+  static addRest() {
+    DBHelper.openIDB().then(db => {
+      if (!db) return;
+      fetch(DBHelper.DATABASE_URL)
+      .then(response => response.json()).then(restaurants =>  {
+          const tx = db.transaction('restaurants', 'readwrite');
+          const store = tx.objectStore('restaurants');
+          restaurants.forEach(resturant => {
+            console.log('resturant data created');
+            store.put(resturant);
+          });
+        });
+    });
+  }
+
+  //get all the resturant data the Database
   static getRest() {
     return DBHelper.openIDB().then(db => {
       return db.transaction('restaurants').objectStore('restaurants').getAll();
@@ -211,7 +226,7 @@ class DBHelper {
 
 }
 //actually creates the database and opens it. Without this you are neevr calling the database to ever do it's thing!
-const dbPromise = DBHelper.openIDB();
+const dbPromise = DBHelper.addRest();
 //Check if browser supports service worker. If so regsiter it!
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
