@@ -1,6 +1,8 @@
 /**
  * Common database helper functions.
  */
+ //self.importScripts('/node_modules/idb/lib/idb.js');
+
 class DBHelper {
 
   /**
@@ -13,59 +15,40 @@ class DBHelper {
   }
 
   //open the idb database
+  /*
     static openIDB() {
-    // If the browser doesn't support service worker, then there isn't a point to having a databse
-    if (!navigator.serviceWorker) {
-      return Promise.resolve();
-    }
     //create database restaurant-reviews, version, and stand up the Database
     var dbPromise = idb.open('restaurant-reviews', 1, function (upgradeDb) {
-      console.log('made new object store');
       //create restaurants database that are arranged by the id of the data set
-      upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
+      const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
       //create an index that the store can be sorted by and used to query on. In the UI we use neighborhood and cuisine
+      console.log('made new object store');
+      restStore.createIndex('ID', 'id');
       restStore.createIndex('neighborhood', 'neighborhood');
       restStore.createIndex('cuisine', 'cuisine_type');
     });
   }
-
+  */
+/*
   static addRest() {
-
-    dbPromise.then(function(db) {
-      var tx = db.transaction('restaurants', 'readwrite');
-      var store = tx.objectStore('restaurants');
-      var item = {
-        name: "Mission Chinese Food",
-        neighborhood: "Manhattan",
-        photograph: "1",
-        address: "171 E Broadway, New York, NY 10002",
-        id: 1
-      };
-      store.add(item);
-      Returned tx.complete;
-    }).then(function(){
-      console.log('added item to store');
-    });
-
-    /*
-    DBHelper.openIDB().then(db => {
-      if (!db) return;
       //console.log('reached this point');
       fetch(DBHelper.DATABASE_URL)
-      .then(response => response.json()).then(restaurants =>  {
-          const tx = db.transaction('restaurants', 'readwrite');
-          const store = tx.objectStore('restaurants');
+      .then(response => response.json())
+      .then(restaurants =>  {
           //console.log('reached this point');
           restaurants.forEach(resturant => {
+            const tx = db.transaction('restaurants', 'readwrite');
+            const store = tx.objectStore('restaurants');
             console.log('resturant data created');
-            store.put(resturant);
+            restStore.put(resturant);
           });
         });
-    });
-    */
   }
+*/
+
 
   //get all the resturant data the Database
+  /*
   static getRest() {
     return DBHelper.openIDB().then(db => {
       return db.transaction('restaurants').objectStore('restaurants').getAll();
@@ -74,7 +57,7 @@ class DBHelper {
     .catch((error => consol.log(`ERR fetching Resturants: ${error}`)));
   }
 
-
+*/
 
 
   /**
@@ -83,7 +66,19 @@ class DBHelper {
    static fetchRestaurants(callback) {
      console.log('Fetching restaurants from the network');
      //fetch from the api
-     fetch(DBHelper.DATABASE_URL).then(response => response.json()).then(restaurants =>callback(null, restaurants));
+     fetch(DBHelper.DATABASE_URL)
+     .then(response => response.json())
+     .then(restaurants => {
+       callback(null, restaurants);
+       /*
+       restaurants.forEach(resturant => {
+         const tx = db.transaction('restaurants', 'readwrite');
+         const store = tx.objectStore('restaurants');
+         console.log('resturant data created');
+         restStore.put(resturant);
+       });
+       */
+     });
    }
 
 
@@ -247,7 +242,7 @@ class DBHelper {
 
 }
 //actually creates the database and opens it. Without this you are neevr calling the database to ever do it's thing!
-const dbPromise = DBHelper.addRest();
+//const dbPromise = DBHelper.addRest();
 //Check if browser supports service worker. If so regsiter it!
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
