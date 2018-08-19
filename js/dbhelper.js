@@ -19,10 +19,10 @@ class DBHelper {
       return Promise.resolve();
     }
     //create database restaurant-reviews, version, and stand up the Database
-    var dpPromise = idb.open('restaurant-reviews', 2, function (upgradeDb) {
+    var dbPromise = idb.open('restaurant-reviews', 1, function (upgradeDb) {
       console.log('made new object store');
       //create restaurants database that are arranged by the id of the data set
-      const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
+      upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
       //create an index that the store can be sorted by and used to query on. In the UI we use neighborhood and cuisine
       restStore.createIndex('neighborhood', 'neighborhood');
       restStore.createIndex('cuisine', 'cuisine_type');
@@ -30,18 +30,39 @@ class DBHelper {
   }
 
   static addRest() {
+
+    dbPromise.then(function(db) {
+      var tx = db.transaction('restaurants', 'readwrite');
+      var store = tx.objectStore('restaurants');
+      var item = {
+        name: "Mission Chinese Food",
+        neighborhood: "Manhattan",
+        photograph: "1",
+        address: "171 E Broadway, New York, NY 10002",
+        id: 1
+      };
+      store.add(item);
+      Returned tx.complete;
+    }).then(function(){
+      console.log('added item to store');
+    });
+
+    /*
     DBHelper.openIDB().then(db => {
       if (!db) return;
+      //console.log('reached this point');
       fetch(DBHelper.DATABASE_URL)
       .then(response => response.json()).then(restaurants =>  {
           const tx = db.transaction('restaurants', 'readwrite');
           const store = tx.objectStore('restaurants');
+          //console.log('reached this point');
           restaurants.forEach(resturant => {
             console.log('resturant data created');
             store.put(resturant);
           });
         });
     });
+    */
   }
 
   //get all the resturant data the Database
