@@ -1,7 +1,6 @@
 /**
  * Common database helper functions.
  */
- //self.importScripts('/node_modules/idb/lib/idb.js');
 
 class DBHelper {
 
@@ -14,21 +13,14 @@ class DBHelper {
     return `http://localhost:${port}/restaurants/`;
   }
 
-  //open the idb database
-  /*
-    static openIDB() {
+  static openIDB() {
     //create database restaurant-reviews, version, and stand up the Database
-    var dbPromise = idb.open('restaurant-reviews', 1, function (upgradeDb) {
-      //create restaurants database that are arranged by the id of the data set
-      const restStore = upgradeDb.createObjectStore('restaurants', { keyPath: 'id'});
-      //create an index that the store can be sorted by and used to query on. In the UI we use neighborhood and cuisine
-      console.log('made new object store');
-      restStore.createIndex('ID', 'id');
-      restStore.createIndex('neighborhood', 'neighborhood');
-      restStore.createIndex('cuisine', 'cuisine_type');
+    const dbPromise = idb.open('resturant-reviews', 1, function(upgradeDb) {
+      console.log('creating a id index');
+      const store = upgradeDb.createObjectStore('restaurants', {keyPath: 'id'});
+      store.createIndex('ID', 'id');
     });
   }
-  */
 /*
   static addRest() {
       //console.log('reached this point');
