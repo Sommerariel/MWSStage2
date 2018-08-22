@@ -3,7 +3,6 @@
  */
 
 class DBHelper {
-
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -50,8 +49,6 @@ class DBHelper {
   }
 
 */
-
-
   /**
    * Fetch all restaurants from the JSON file that is served at the port
    */
@@ -59,21 +56,19 @@ class DBHelper {
      //using the fetch api to pull data from the server
      //the json method on a response object returns a promise
      fetch(DBHelper.DATABASE_URL)
-     .then(response => response.json())
-     .then(restaurants => {
-       callback(null, restaurants);
-       console.log(restaurants);
-       //this is where I need to popular the database from the json object
-       /*
-       restaurants.forEach(resturant => {
-         const tx = db.transaction('restaurants', 'readwrite');
-         const store = tx.objectStore('restaurants');
-         console.log('resturant data created');
-         restStore.put(resturant);
-       });
-       */
-     });
+     .then(response => response.json()) //return json from sever
+     .then(response =>
+       {
+         //TODO store data into the database
+             dbPromise.then(db => {
+               const tx = db.transaction('resturants', 'readwrite');
+               const store = tx.objectStore('resturants');
+           })
+       }
+     ).catch((error => console.log(`ERR fetching Resturants: ${error}`)));
    }
+
+
 
 
 /**
