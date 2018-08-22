@@ -6,6 +6,17 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
 const del = require('del');
+var imageResize = require('gulp-image-resize');
+
+
+gulp.task('img-build', function() {
+  gulp.src('/img/*.{.jpg}')
+    .pipe(imageResize({
+      quality: 0.5,
+      width: 600
+    }))
+    .pipe(gulp.dest('img-responsive'));
+});
 
 gulp.task('default', () =>
     gulp.src('css/**/*.css')
