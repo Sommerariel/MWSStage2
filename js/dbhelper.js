@@ -1,6 +1,8 @@
 /**
  * Common database helper functions.
  */
+'use strict';
+
  const dbPromise = idb.open('resturant-reviews', 1, function(upgradeDb) {
    console.log('creating a id index');
    const store = upgradeDb.createObjectStore('restaurants', {keyPath: "id"});
@@ -37,7 +39,16 @@ class DBHelper {
            });
           callback(null, restaurants);
        }
-     ).catch((error => console.log(`ERR fetching Restaurants: ${error}`)));
+     ).catch(function () {
+       console.log(`You seem to be offline.Please check your internet`);
+       dbPromise.then(db => {
+         const tx = db.transaction('restaurants', 'readwrite');
+         const store = tx.objectStore('restaurants');
+         return store.getAll();
+     }).then(restaurants => {
+         callback(null, restaurants);
+     })
+     });
    }
 
   /**
@@ -58,41 +69,6 @@ class DBHelper {
       }
     });
   }
-
-  /**
-   * Fetch restaurants by a cuisine type with proper error handling.
-   */
- /**
-  static fetchRestaurantByCuisine(cuisine, callback) {
-    // Fetch all restaurants  with proper error handling
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given cuisine type
-        const results = restaurants.filter(r => r.cuisine_type == cuisine);
-        callback(null, results);
-      }
-    });
-  }
-*/
-  /**
-   * Fetch restaurants by a neighborhood with proper error handling.
-   */
-   /**
-  static fetchRestaurantByNeighborhood(neighborhood, callback) {
-    // Fetch all restaurants
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given neighborhood
-        const results = restaurants.filter(r => r.neighborhood == neighborhood);
-        callback(null, results);
-      }
-    });
-  }
-  */
 
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
@@ -180,10 +156,8 @@ class DBHelper {
     );
     return marker;
   }
-
 }
-//actually creates the database and opens it. Without this you are neevr calling the database to ever do it's thing!
-//const dbPromise = DBHelper.addRest();
+
 //Check if browser supports service worker. If so regsiter it!
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {

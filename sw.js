@@ -1,12 +1,9 @@
 /* service worker script */
 
 //declare caches
-
 const  Reviews = 'reviews';
 
-
 //install the service worker and cache files
-
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open('reviews').then(function(cache) {
@@ -15,9 +12,11 @@ self.addEventListener('install', event => {
           '/',
           '/index.html',
           '/restaurant.html',
+          '/css/styles.css',
           '/js/main.js',
           '/js/restaurant_info.js',
-          '/js/dbhelper.js'
+          '/js/dbhelper.js',
+          '/js/idb.js'
         ]
       );
     })
@@ -25,7 +24,6 @@ self.addEventListener('install', event => {
 })
 
 //get from the cache if possible, if not check the network
-
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
