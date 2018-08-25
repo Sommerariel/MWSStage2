@@ -17,39 +17,6 @@ class DBHelper {
     return `http://localhost:${port}/restaurants/`;
   }
 
-  static openIDB() {
-    //create database restaurant-reviews, version, and stand up the Database
-
-  }
-/*
-  static addRest() {
-      //console.log('reached this point');
-      fetch(DBHelper.DATABASE_URL)
-      .then(response => response.json())
-      .then(restaurants =>  {
-          //console.log('reached this point');
-          restaurants.forEach(resturant => {
-            const tx = db.transaction('restaurants', 'readwrite');
-            const store = tx.objectStore('restaurants');
-            console.log('resturant data created');
-            restStore.put(resturant);
-          });
-        });
-  }
-*/
-
-
-  //get all the resturant data the Database
-  /*
-  static getRest() {
-    return DBHelper.openIDB().then(db => {
-      return db.transaction('restaurants').objectStore('restaurants').getAll();
-      console.log('retrieved rest data');
-    })
-    .catch((error => consol.log(`ERR fetching Resaurants: ${error}`)));
-  }
-
-*/
   /**
    * Fetch all restaurants from the JSON file that is served at the port
    */
@@ -60,7 +27,6 @@ class DBHelper {
      .then(response => response.json()) //return json from sever
      .then(restaurants =>
        {
-         //TODO store data into the database
              dbPromise.then(db => {
                const tx = db.transaction('restaurants', 'readwrite');
                const store = tx.objectStore('restaurants');
@@ -73,26 +39,6 @@ class DBHelper {
        }
      ).catch((error => console.log(`ERR fetching Restaurants: ${error}`)));
    }
-
-
-
-
-/**
-  static fetchRestaurants(callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
-        callback(null, restaurants);
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
-  }*/
 
   /**
    * Fetch a restaurant by its ID.
