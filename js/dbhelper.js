@@ -1,6 +1,11 @@
 /**
  * Common database helper functions.
  */
+ const dbPromise = idb.open('resturant-reviews', 1, function(upgradeDb) {
+   console.log('creating a id index');
+   const store = upgradeDb.createObjectStore('restaurants', {keyPath: "id"});
+   store.createIndex('ID', 'id');
+ });
 
 class DBHelper {
   /**
@@ -14,11 +19,7 @@ class DBHelper {
 
   static openIDB() {
     //create database restaurant-reviews, version, and stand up the Database
-    const dbPromise = idb.open('resturant-reviews', 1, function(upgradeDb) {
-      console.log('creating a id index');
-      const store = upgradeDb.createObjectStore('restaurants', {keyPath: 'id'});
-      store.createIndex('ID', 'id');
-    });
+
   }
 /*
   static addRest() {
@@ -45,7 +46,7 @@ class DBHelper {
       return db.transaction('restaurants').objectStore('restaurants').getAll();
       console.log('retrieved rest data');
     })
-    .catch((error => consol.log(`ERR fetching Resturants: ${error}`)));
+    .catch((error => consol.log(`ERR fetching Resaurants: ${error}`)));
   }
 
 */
@@ -57,15 +58,20 @@ class DBHelper {
      //the json method on a response object returns a promise
      fetch(DBHelper.DATABASE_URL)
      .then(response => response.json()) //return json from sever
-     .then(response =>
+     .then(restaurants =>
        {
          //TODO store data into the database
              dbPromise.then(db => {
-               const tx = db.transaction('resturants', 'readwrite');
-               const store = tx.objectStore('resturants');
-           })
+               const tx = db.transaction('restaurants', 'readwrite');
+               const store = tx.objectStore('restaurants');
+               restaurants.forEach(restaurant => {
+                 store.put(restaurant);
+               });
+               return tx.complete;
+           });
+          callback(null, restaurants);
        }
-     ).catch((error => console.log(`ERR fetching Resturants: ${error}`)));
+     ).catch((error => console.log(`ERR fetching Restaurants: ${error}`)));
    }
 
 
