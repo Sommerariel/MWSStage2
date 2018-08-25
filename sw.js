@@ -10,6 +10,7 @@ self.addEventListener('install', event => {
       return cache.addAll(
         [
           '/',
+          '/img'
           '/index.html',
           '/restaurant.html',
           '/css/styles.css',
