@@ -23,16 +23,16 @@
   </header>
 
   <main id="maincontent-home" class="home-main">
-    <section id="map-container">
+  <section id="map-container">
       <div id="map" aria-label="Map of Resturants with local reviews" role="application" tabindex="0"></div>
     </section>
     <section id="filter">
       <div class="filter-options">
         <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" role="listbox">
+        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" role="listbox" aria-label="neighborhoods">
           <option value="all" aria-labelledby="neighborhoods-select">All Neighborhoods</option>
         </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" role="listbox">
+        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" role="listbox" aria-label="cuisines">
           <option value="all" aria-labelledby="cuisines-select">All Cuisines</option>
         </select>
       </div>
