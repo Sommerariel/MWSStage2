@@ -25,7 +25,11 @@ In a terminal, check the version of Python you have: `python -V`. If you have Py
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write.
 
 ---
-My Project Thus Far
-This app is meant to be a reflection of the material learned within the first 1/3 of the Mobile Web Specialist Certification Course. I have adapted the code given me to be reflect 3 core areas: responsiveness, offline availability and accessibility. The content renders across a variety of viewports and size and changes depending on screen size. The images are loaded in only at the sizes needs to. Not too much, not too little. All content is accessible offline and in lo-fi connections for when the app cannot connect properly to the network. The app is also accessible to those who use keyboard functionality as well as a screen reader with the help of ARIA. 
-# RestaurantStage2
-# MWSStage2
+#Restaurant Stage 1
+*My Project Thus Far*
+This app is meant to be a reflection of the material learned within the first 1/3 of the Mobile Web Specialist Certification Course. I have adapted the code given me to be reflect 3 core areas: responsiveness, offline availability and accessibility. The content renders across a variety of viewports and size and changes depending on screen size. The images are loaded in only at the sizes needs to. Not too much, not too little. All content is accessible offline and in lo-fi connections for when the app cannot connect properly to the network. The app is also accessible to those who use keyboard functionality as well as a screen reader with the help of ARIA.
+# Restaurant Stage 2
+*My Project Thus Far*
+I have expanded on the app from the first section of the course and added a few key features. The data now pulls in from a server and populates the page. The data from the server is then put into a database using the indexedDB Promise Library from Jake Archibald which can be found [here](https://github.com/jakearchibald/idb). The data is then cached using the service worker.
+All content is still responsive with some added improvements on accessibility.
+The following are my lighthouse scores that I get running my project locally. 
