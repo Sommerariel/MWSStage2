@@ -1,5 +1,17 @@
 # Mobile Web Specialist Certification Course
 ---
+#Restaurant Stage 1
+*My Project Thus Far*
+This app is meant to be a reflection of the material learned within the first 1/3 of the Mobile Web Specialist Certification Course. I have adapted the code given me to be reflect 3 core areas: responsiveness, offline availability and accessibility. The content renders across a variety of viewports and size and changes depending on screen size. The images are loaded in only at the sizes needs to. Not too much, not too little. All content is accessible offline and in lo-fi connections for when the app cannot connect properly to the network. The app is also accessible to those who use keyboard functionality as well as a screen reader with the help of ARIA.
+---
+# Restaurant Stage 2
+*My Project Thus Far*
+I have expanded on the app from the first section of the course and added a few key features. The data now pulls in from a server and populates the page. The data from the server is then put into a database using the indexedDB Promise Library from Jake Archibald which can be found [here](https://github.com/jakearchibald/idb). The data is then cached using the service worker.
+All content is still responsive with some added improvements on accessibility.
+The following are my lighthouse scores that I get running my project locally with Simulated Fast 3G, 4x CPU Slowdown on Mobile and Clearing Storage.
+![lighthouse Scores: Performance is 96, Progressive Web App is 91, Accessibility is 94, Best Practices is 94, and SEO is 89](https://github.com/Sommerariel/MWSStage2/blob/master/Lighthouse-score.png)
+
+---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
 ## Project Overview: Stage 1
@@ -26,13 +38,3 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 ## Project ADDENDUM:
  This repository is using [leafletjs](https://leafletjs.com/) with [Mapbox](https://www.mapbox.com/) jpg tiles optimized with quality:70.
 You need to replace <your MAPBOX API KEY HERE> with token from [Mapbox](https://www.mapbox.com/), and you can check the [pricing](https://www.mapbox.com/pricing/): free and no credit card required.
-
----
-#Restaurant Stage 1
-*My Project Thus Far*
-This app is meant to be a reflection of the material learned within the first 1/3 of the Mobile Web Specialist Certification Course. I have adapted the code given me to be reflect 3 core areas: responsiveness, offline availability and accessibility. The content renders across a variety of viewports and size and changes depending on screen size. The images are loaded in only at the sizes needs to. Not too much, not too little. All content is accessible offline and in lo-fi connections for when the app cannot connect properly to the network. The app is also accessible to those who use keyboard functionality as well as a screen reader with the help of ARIA.
-# Restaurant Stage 2
-*My Project Thus Far*
-I have expanded on the app from the first section of the course and added a few key features. The data now pulls in from a server and populates the page. The data from the server is then put into a database using the indexedDB Promise Library from Jake Archibald which can be found [here](https://github.com/jakearchibald/idb). The data is then cached using the service worker.
-All content is still responsive with some added improvements on accessibility.
-The following are my lighthouse scores that I get running my project locally.
