@@ -1,5 +1,5 @@
 {
-  "short_name": "Reviews",
+  "short_name": "Review",
   "name": "Restaurant Reviews",
   "icons": [
     {
@@ -15,6 +15,6 @@
   ],
   "start_url": "index.html",
   "background_color": "#3BCCCC",
-  "display": "browser",
+  "display": "fullscreen",
   "theme_color": "#3BCCCC"
 }
