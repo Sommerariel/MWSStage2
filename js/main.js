@@ -195,6 +195,7 @@ createRestaurantHTML = (restaurant) => {
     function onClick() {
       window.location.href = marker.options.url;
     }
+    self.markers.push(marker);
   });
 }
 
