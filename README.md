@@ -1,10 +1,7 @@
 # Mobile Web Specialist Certification Course
+
 ---
-# Restaurant Stage 1
-*My Project Thus Far*
-This app is meant to be a reflection of the material learned within the first 1/3 of the Mobile Web Specialist Certification Course. I have adapted the code given me to be reflect 3 core areas: responsiveness, offline availability and accessibility. The content renders across a variety of viewports and size and changes depending on screen size. The images are loaded in only at the sizes needs to. Not too much, not too little. All content is accessible offline and in lo-fi connections for when the app cannot connect properly to the network. The app is also accessible to those who use keyboard functionality as well as a screen reader with the help of ARIA.
----
-# Restaurant Stage 2
+## Restaurant Stage 2
 *My Project Thus Far*
 I have expanded on the app from the first section of the course and added a few key features. The data now pulls in from a server and populates the page. The data from the server is then put into a database using the indexedDB Promise Library from Jake Archibald which can be found [here](https://github.com/jakearchibald/idb). The data is then cached using the service worker.
 All content is still responsive with some added improvements on accessibility.
@@ -14,23 +11,61 @@ The following are my lighthouse scores that I get running my project locally wit
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
-## Project Overview: Stage 1
+## Project Overview: Stage 2
+In order to get started you need to go here and fork the [server repository](https://github.com/udacity/mws-restaurant-stage-2) and then place both this and the server repository in one master folder side by side. The server repository is not mine and was written for this course, by the lovely @forbiddenvoid @richardkalehoff @asparr. All credit goes to them.
 
-For the **Restaurant Reviews** projects, you will incrementally convert a static webpage to a mobile-ready web application. In **Stage One**, you will take a static design that lacks accessibility and convert the design to be responsive on different sized displays and accessible for screen reader use. You will also add a service worker to begin the process of creating a seamless offline experience for your users.
+### Local Development API Server
+### Usage
+#### Get Restaurants
+```
+curl "http://localhost:1337/restaurants"
+```
+#### Get Restaurants by id
+````
+curl "http://localhost:1337/restaurants/{3}"
+````
 
-### Specification
+## Architecture
+Local server
+- Node.js
+- Sails.js
 
-You have been provided the code for a restaurant reviews website. The code has a lot of issues. It’s barely usable on a desktop browser, much less a mobile device. It also doesn’t include any standard accessibility features, and it doesn’t work offline at all. Your job is to update the code to resolve these issues while still maintaining the included functionality.
+## Contributors
 
-### What do I do from here?
+- [Brandy Lee Camacho - Technical Project Manager](mailto:brandy.camacho@udacity.com)
+- [David Harris - Web Services Lead](mailto:david.harris@udacity.com)
+- [Omar Albeik - Frontend engineer](mailto:omaralbeik@gmail.com)
 
-1. In this folder, start up a simple HTTP server to serve up the site files on your local computer. Python has some simple tools to do this, and you don't even need to know Python. For most people, it's already installed on your computer.
+## Getting Started
 
-In a terminal, check the version of Python you have: `python -V`. If you have Python 2.x, spin up the server with `python -m SimpleHTTPServer 8000` (or some other port, if port 8000 is already in use.) For Python 3.x, you can use `python3 -m http.server 8000`. If you don't have Python installed, navigate to Python's [website](https://www.python.org/) to download and install the software.
+### Development local API Server
+_Location of server = /server_
+Server depends on [node.js LTS Version: v6.11.2 ](https://nodejs.org/en/download/), [npm](https://www.npmjs.com/get-npm), and [sails.js](http://sailsjs.com/)
+Please make sure you have these installed before proceeding forward.
 
-2. With your server running, visit the site: `http://localhost:8000`, and look around for a bit to see what the current experience looks like.
-3. Explore the provided code, and make start making a plan to implement the required features in three areas: responsive design, accessibility and offline use.
-4. Write code to implement the updates to get this site on its way to being a mobile-ready website.
+Great, you are ready to proceed forward; awesome!
+
+Let's start with running commands in your terminal, known as command line interface (CLI)
+
+###### Install project dependancies
+```Install project dependancies
+# npm i
+```
+###### Install Sails.js globally
+```Install sails global
+# npm i sails -g
+```
+###### Start the server
+```Start server
+# node server
+```
+### You should now have access to your API server environment
+debug: Environment : development
+debug: Port        : 1337
+
+
+If you find a bug in the source code or a mistake in the documentation, you can help us by
+submitting an issue to our [Waffle Dashboard](https://waffle.io/udacity/mwnd-issues). Even better you can submit a Pull Request with a fix :)
 
 ### Note about ES6
 
