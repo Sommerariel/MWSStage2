@@ -1,18 +1,14 @@
 # Mobile Web Specialist Certification Course
 
 ---
-## Restaurant Stage 2
+## Restaurant Stage 3
 *My Project Thus Far*
-I have expanded on the app from the first section of the course and added a few key features. The data now pulls in from a server and populates the page. The data from the server is then put into a database using the indexedDB Promise Library from Jake Archibald which can be found [here](https://github.com/jakearchibald/idb). The data is then cached using the service worker.
-All content is still responsive with some added improvements on accessibility.
-The following are my lighthouse scores that I get running my project locally with Simulated Fast 3G, 4x CPU Slowdown on Mobile and Clearing Storage.
-![lighthouse Scores: Performance is 96, Progressive Web App is 91, Accessibility is 94, Best Practices is 94, and SEO is 89](https://github.com/Sommerariel/MWSStage2/blob/master/Lighthouse-score.png)
 
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
-## Project Overview: Stage 2
-In order to get started you need to go here and fork the [server repository](https://github.com/udacity/mws-restaurant-stage-2) and then place both this and the server repository in one master folder side by side. The server repository is not mine and was written for this course, by the lovely @forbiddenvoid @richardkalehoff @asparr. All credit goes to them.
+## Project Overview: Stage 3
+ The server repository is not mine and was written for this course, by the lovely @forbiddenvoid @richardkalehoff @asparr. All credit goes to them.
 
 ### Local Development API Server
 ### Usage
